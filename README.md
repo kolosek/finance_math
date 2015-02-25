@@ -1,5 +1,5 @@
-[![Gem Version](https://img.shields.io/badge/finance_math-0.2-blue.svg)]
-[![Build Status](https://img.shields.io/badge/build-passing-green.svg)]
+![Gem Version](https://img.shields.io/badge/finance_math-0.2-blue.svg)
+![Build Status](https://img.shields.io/badge/build-passing-green.svg)
 
 
 ## What is FinanceMath?
