@@ -1,5 +1,6 @@
 ![Gem Version](https://img.shields.io/badge/finance_math-0.2-blue.svg)
-![Build Status](https://img.shields.io/badge/build-passing-green.svg)
+[![Build Status](https://semaphoreapp.com/api/v1/projects/869d7630-55d3-46e5-9dc2-03d0d1cfecfe/363108/shields_badge.svg)](https://semaphoreapp.com/kolosek/finance_math)
+[![Code Climate](https://codeclimate.com/github/kolosek/finance_math/badges/gpa.svg)](https://codeclimate.com/github/kolosek/finance_math)
 
 
 ## What is FinanceMath?
@@ -41,6 +42,17 @@ loan = Loan.new(10.5, 12, 15000)
 loan.pmt
 ```
 
+## APR
+
+Calculates the Annual Percentage Rate.
+
+```ruby
+
+loan = Loan.new(10.5, 12, 15000)
+
+loan.apr
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/kolosek/finance_math/fork )
@@ -60,3 +72,5 @@ MIT License. See LICENSE for details.
 ## Copyright
 
 Copyright (c) 2014-2015 Nebojsa Zoric, and Kolosek, Inc. (http://kolosek.com)
+
+For any Ruby on Rails related work, please contact directly via form on http://kolosek.com

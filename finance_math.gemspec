@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nebojsa Zoric"]
   spec.email         = ["office@kolosek.com"]
   spec.summary       = %q{Finance library for Ruby.}
-  spec.description   = %q{Implementation of Excel functions in Ruby language}
+  spec.description   = %q{Implementation of Loan/Mortgage functions in Ruby language}
   spec.homepage      = ""
   spec.license       = "MIT"
 
