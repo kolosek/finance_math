@@ -1,4 +1,4 @@
-![Gem Version](https://img.shields.io/badge/finance_math-0.2-blue.svg)
+![Gem Version](https://img.shields.io/badge/finance_math-1.0-blue.svg)
 [![Build Status](https://semaphoreapp.com/api/v1/projects/869d7630-55d3-46e5-9dc2-03d0d1cfecfe/363108/shields_badge.svg)](https://semaphoreapp.com/kolosek/finance_math)
 [![Code Climate](https://codeclimate.com/github/kolosek/finance_math/badges/gpa.svg)](https://codeclimate.com/github/kolosek/finance_math)
 
@@ -30,7 +30,9 @@ Loan.new(10.5, 12, 15000)
 
 ## Advanced Usage
 
-Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment
+Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment. 
+
+Defaults are bank fee = 5, currency protection = 3, so please update if you need other values.
 
 ```ruby
 
@@ -84,7 +86,8 @@ Please cover with tests your pull requests
 ## Copyright
 
 Copyright (c) 2014-2015 Nebojsa Zoric, and Kolosek, Inc. (http://kolosek.com)
-Follow up @nebojsaz and @kolosek
+
+###Follow up @nebojsaz and @kolosek
 
 
 ## License
