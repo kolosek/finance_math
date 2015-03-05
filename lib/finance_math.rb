@@ -1,5 +1,6 @@
-require "finance_math/version"
+require "version"
 
 module FinanceMath
-  autoload :Loan,         'finance_math/loan'
+  autoload :Loan,             'finance_math/loan'
+  autoload :Mortgage,         'finance_math/mortgage'
 end

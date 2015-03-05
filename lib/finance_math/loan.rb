@@ -28,9 +28,11 @@ module FinanceMath
 
     # @return [DecNum] P principal
     # @api public
-    attr_reader :principal    
+    attr_reader :principal
 
-
+    # @return [Float] fee
+    # @api public
+    attr_reader :fee
 
     # create a new Loan instance
     # @return [Loan]
@@ -44,8 +46,8 @@ module FinanceMath
     # @see http://en.wikipedia.org/wiki/Nominal_interest_rate
     # @api public
 
-    def initialize(nominal_rate, duration, amount, structure_fee=5, currency_protection=3)
-      @nominal_rate, @amount, @duration, @structure_fee, @currency_protection = nominal_rate.to_f, amount, duration, structure_fee.to_f, currency_protection.to_f
+    def initialize(nominal_rate, duration, amount, structure_fee=5, currency_protection=3, fee=0)
+      @nominal_rate, @amount, @duration, @structure_fee, @currency_protection, @fee = nominal_rate.to_f, amount, duration, structure_fee.to_f, currency_protection.to_f, fee.to_f
       @principal = principal_calculation
       @monthly_rate = @nominal_rate / 100 / 12
     end
@@ -55,35 +57,7 @@ module FinanceMath
     end
 
     def apr
-      pmt_base = pmt
-      n = duration.to_f / 12
-      q = (duration > 12) ? 12 : duration
-      i = pmt_base * n * q / principal - 1
-      #puts "n: #{n} q: #{q} i: #{i} pmt: #{pmt_base}"
-      find(pmt_base, n, q, i)
-    end
-
-    def principal_base(m, n, q, i)
-      m * ( 1 - ( 1 + ( i / q ) ) ** (- n * q) ) * q / i
-    end
-
-    def near(a, b)
-      r = 0.1
-      return ((a - r) < b && (a + r) > b) || ((b - r) < a && (b + r) > a)
-    end
-
-    def find(pmt_base, n, q, i)
-      p = principal_base(pmt_base, n, q, i)
-
-      return i if near(p, principal)
-      
-      if p < principal
-        i -= 0.00001
-      elsif p > principal
-        i += 0.00001
-      end
-      
-      find(pmt_base, n, q, i)
+      @apr ||= calculate_apr
     end
 
     protected
@@ -107,7 +81,36 @@ module FinanceMath
     private
 
       def principal_calculation
-        amount * (1 - currency_protection/100 - structure_fee / 100 )
+        amount * (1 - currency_protection/100 - structure_fee / 100 ) - fee * duration
+      end
+
+      # solves APR
+      # [a (1 + a)^N] / [(1 + a)^N - 1] - P/C = 0
+      # where a = APR/1200, N = duration, P = monthly payment, C = loan_amount
+      # Newton-Raphson finds root (the value for 'a' that makes f(a) = 0)
+      def calculate_apr
+        payment_ratio = pmt / principal_calculation 
+        duration = @duration 
+        f = lambda {|k| (k**(duration + 1) - (k**duration * (payment_ratio + 1)) + payment_ratio)}
+        f_deriv = lambda { |k| ((duration + 1) * k**duration) - (duration * (payment_ratio + 1) * k**(duration - 1))}
+
+        root = newton_raphson(f, f_deriv, monthly_rate + 1)
+        100 * 12 * (root -1).to_f
+      end
+
+      # 'start' is the monthly_rate, Newton Raphson will find the apr root very quickly
+      # k1 = k0 - f(k0)/f'(k0)
+      # k_plus_one = k - f(k)/f_deriv(k)  f_deriv should be an positive number!
+      # We find the k-intercept of the tangent line at point k_plus_one and compare k to k_plus_one.
+      # This is repeated until a sufficiently accurate value is reached, which can be specified with the 'precision' parameter
+      def newton_raphson(f, f_deriv, start, precision = 5)
+        k_plus_one = start
+        k = 0.0
+        while ((k - 1) * 10**precision).to_f.floor !=  ((k_plus_one - 1) * 10**precision).to_f.floor
+          k = k_plus_one
+          k_plus_one = k - f.call(k) / f_deriv.call(k).abs
+        end
+        k_plus_one
       end
   end
 end

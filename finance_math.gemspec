@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'finance_math/version'
+require 'version'
 
 Gem::Specification.new do |spec|
   spec.name          = "finance_math"
   spec.version       = FinanceMath::VERSION
   spec.authors       = ["Nebojsa Zoric"]
   spec.email         = ["office@kolosek.com"]
-  spec.summary       = %q{Finance library for Ruby.}
-  spec.description   = %q{Implementation of Loan/Mortgage functions in Ruby language}
-  spec.homepage      = ""
+  spec.summary       = %q{Finance and mortgage library for Ruby.}
+  spec.description   = %q{Implementation of Loan/Mortgage functions in Ruby language. APR function and PMT function. In calculations it includes implementation of bank fee, marketplace fee, fees for each payment to provide the most precise calculation at very high speed. }
+  spec.homepage      = "http://kolosek.com/gems/finance_math"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

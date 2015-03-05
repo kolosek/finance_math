@@ -37,33 +37,73 @@ describe Loan do
       loan = Loan.new(0, 6, 10000)
       expect(loan.pmt).to eq(1666.6666666666667)
     end
+
+    it "should return correct pmt value" do
+      loan = Loan.new(13, 90, 1000000)
+      expect(loan.pmt).to eq(17449.90775727763)
+    end
   end
 
-  context ".apr" do
+  context ".apr, edge cases" do
 
     it "should return correct apr value" do
-      loan = Loan.new(16, 24, 10000)
-      expect(loan.apr).to eq(0.24699853524196447)
+      loan = Loan.new(16, 24, 9200)
+      expect(loan.apr).to eq(24.699310868498614)
     end
 
     it "should return correct apr value" do
       loan = Loan.new(13, 24, 10000)
-      expect(loan.apr).to eq(0.2159014588291408)
+      expect(loan.apr).to eq(21.589972932434698)
     end
 
     it "should return correct apr value" do
       loan = Loan.new(13, 18, 10000)
-      expect(loan.apr).to eq(0.2418055150965281)
+      expect(loan.apr).to eq(24.1815502466296)
     end
 
-    # it "should return correct apr value" do
-    #   loan = Loan.new(13, 6, 10000)
-    #   expect(loan.apr).to eq(0.2418055150965281)
-    # end
+    it "should return correct apr value" do
+      loan = Loan.new(13, 12, 10000)
+      expect(loan.apr).to eq(29.179538647635006)
+    end
 
-    # it "should return correct apr value" do
-    #   loan = Loan.new(13, 36, 10000)
-    #   expect(loan.apr).to eq(0.2418055150965281)
-    # end
+    it "should return correct apr value" do
+      loan = Loan.new(13, 6, 10000)
+      expect(loan.apr).to eq(42.82076503747119)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(13, 36, 10000)
+      expect(loan.apr).to eq(18.93638316167774)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(13, 90, 10000000)
+      expect(loan.apr).to eq(15.690778147507167)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(13, 90, 50000000)
+      expect(loan.apr).to eq(15.690778147507167)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(13, 1, 50000000)
+      expect(loan.apr).to eq(118.47826151517138)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(80, 1, 1000)
+      expect(loan.apr).to eq(191.30434783476406)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(36, 200, 500)
+      expect(loan.apr).to eq(39.173057290003044)
+    end
+
+    it "should return correct apr value" do
+      loan = Loan.new(15, 36, 10000, 5, 3, 10)
+      expect(loan.apr).to eq(23.964418264624054)
+    end
   end
 end

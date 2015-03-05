@@ -5,7 +5,7 @@
 
 ## What is FinanceMath?
 
-FinanceMath is a Ruby library for mapping Exel functions. Due to lack such libraries to handle every day need, this library is created.
+FinanceMath is a Ruby library for mapping Loan based Exel functions. It deals with problem of calculating the PMT and APR functions. It implements advanced usage, taking into account bank fees, fee for for each payment and currency protection (if currency other than $ USD). Highly precise with high speed of execution. 
 
 ## Installation
 
@@ -28,29 +28,45 @@ Create an instance, and pass parameters for nominal annual rate, duration (in mo
 Loan.new(10.5, 12, 15000)
 ```
 
+## Advanced Usage
+
+Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment
+
+```ruby
+
+Loan.new(10.5, 12, 15000, 5.1, 2.75, 25)
+```
+
 ## Functions 
 
 This is the list of available functions.
 
-## PMT
+### Loan.pmt
 
 Calculates the periodic payment for an annuity investment based on constant-amount periodic payments and a constant interest rate.
 
 ```ruby
 
-loan = Loan.new(10.5, 12, 15000)
+loan = Loan.new(10, 12, 1000)
 loan.pmt
+# 87.9158872300099
+
 ```
 
-## APR
+### Loan.apr
 
 Calculates the Annual Percentage Rate.
 
 ```ruby
 
-loan = Loan.new(10.5, 12, 15000)
-
+loan = Loan.new(13, 12, 10000)
 loan.apr
+#29.179538647635006
+
+loan = Loan.new(15, 36, 10000, 5, 3, 10)
+loan.apr
+#23.964418264624054
+
 ```
 
 ## Contributing
@@ -65,12 +81,12 @@ loan.apr
 
 Please cover with tests your pull requests
 
-## License
-
-MIT License. See LICENSE for details.
-
 ## Copyright
 
 Copyright (c) 2014-2015 Nebojsa Zoric, and Kolosek, Inc. (http://kolosek.com)
+Follow up @nebojsaz and @kolosek
 
-For any Ruby on Rails related work, please contact directly via form on http://kolosek.com
+
+## License
+
+MIT License. See LICENSE for details.
