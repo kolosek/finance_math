@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["office@kolosek.com"]
   spec.summary       = %q{Finance and mortgage library for Ruby.}
   spec.description   = %q{Implementation of Loan/Mortgage functions in Ruby language. APR function and PMT function. In calculations it includes implementation of bank fee, marketplace fee, fees for each payment to provide the most precise calculation at very high speed. }
-  spec.homepage      = "http://kolosek.com/gems/finance_math"
+  spec.homepage      = "http://kolosek.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
