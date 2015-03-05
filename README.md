@@ -1,4 +1,4 @@
-![Gem Version](https://img.shields.io/badge/finance_math-1.0-blue.svg)
+[![Gem Version](https://badge.fury.io/rb/finance_math.svg)](http://badge.fury.io/rb/finance_math)
 [![Build Status](https://semaphoreapp.com/api/v1/projects/869d7630-55d3-46e5-9dc2-03d0d1cfecfe/363108/shields_badge.svg)](https://semaphoreapp.com/kolosek/finance_math)
 [![Code Climate](https://codeclimate.com/github/kolosek/finance_math/badges/gpa.svg)](https://codeclimate.com/github/kolosek/finance_math)
 
