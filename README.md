@@ -22,21 +22,22 @@ Run `bundle install`.
 ## Basic Usage
 
 Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan.
+Defaults are structure_fee = 5, currency protection = 3, so please update if you need other values.
 
 ```ruby
 
-Loan.new(10.5, 12, 15000)
+Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000)
 ```
 
 ## Advanced Usage
 
 Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment. 
 
-Defaults are bank fee = 5, currency protection = 3, so please update if you need other values.
+Defaults are structure_fee = 5, currency protection = 3, so please update if you need other values.
 
 ```ruby
 
-Loan.new(10.5, 12, 15000, 5.1, 2.75, 25)
+Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000, structure_fee: 5.1, currency_protection: 2.75, fee: 25)
 ```
 
 ## Functions 
@@ -49,7 +50,7 @@ Calculates the periodic payment for an annuity investment based on constant-amou
 
 ```ruby
 
-loan = Loan.new(10, 12, 1000)
+loan = Loan.new(nominal_rate: 10, duration: 12, amount: 1000)
 loan.pmt
 # 87.9158872300099
 
@@ -61,11 +62,11 @@ Calculates the Annual Percentage Rate.
 
 ```ruby
 
-loan = Loan.new(13, 12, 10000)
+loan = Loan.new(nominal_rate: 13, duration: 12, amount: 10000)
 loan.apr
 #29.179538647635006
 
-loan = Loan.new(15, 36, 10000, 5, 3, 10)
+loan = Loan.new(nominal_rate: 15, duration: 36, amount: 10000, structure_fee: 5, currency_protection: 3, fee: 10)
 loan.apr
 #23.964418264624054
 
