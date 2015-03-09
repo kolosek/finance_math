@@ -47,13 +47,7 @@ module FinanceMath
     # @api public
 
     def initialize(options = {})
-      @nominal_rate = options.fetch(:nominal_rate).to_f
-      @duration = options.fetch(:duration).to_f
-      @amount = options.fetch(:amount).to_f
-      @structure_fee = options.fetch(:structure_fee, 5).to_f
-      @currency_protection = options.fetch(:currency_protection, 3).to_f
-      @fee = options.fetch(:fee, 0).to_f
-      @nominal_rate, @amount, @duration, @structure_fee, @currency_protection, @fee = nominal_rate.to_f, amount, duration, structure_fee.to_f, currency_protection.to_f, fee.to_f
+      initialize_options(options)
       @principal = principal_calculation
       @monthly_rate = @nominal_rate / 100 / 12
     end
@@ -87,6 +81,15 @@ module FinanceMath
       end
 
     private
+
+      def initialize_options(options)
+        @nominal_rate = options.fetch(:nominal_rate).to_f
+        @duration = options.fetch(:duration).to_f
+        @amount = options.fetch(:amount).to_f
+        @structure_fee = options.fetch(:structure_fee, 5).to_f
+        @currency_protection = options.fetch(:currency_protection, 3).to_f
+        @fee = options.fetch(:fee, 0).to_f      
+      end
 
       def principal_calculation
         amount * (1 - currency_protection/100 - structure_fee / 100 ) - fee * duration
