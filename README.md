@@ -89,7 +89,7 @@ Please cover with tests your pull requests
 Finance Math is maintained and sponsored by
 [Kolosek] (http://kolosek.com).
 
-![Kolosek](https://kolosek.com/assets/logo.png)
+![Kolosek](http://kolosek.com/logo.png)
 
 Initially developed by Nebojsa Zoric
 
