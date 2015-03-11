@@ -84,9 +84,14 @@ loan.apr
 
 Please cover with tests your pull requests
 
-## Copyright
+## Credits
 
-Copyright (c) 2014-2015 Nebojsa Zoric, and Kolosek, Inc. (http://kolosek.com)
+Finance Math is maintained and sponsored by
+[Kolosek] (http://kolosek.com).
+
+![Kolosek](https://kolosek.com/assets/logo.png)
+
+Initially developed by Nebojsa Zoric
 
 ###Follow up @nebojsaz and @kolosek
 
