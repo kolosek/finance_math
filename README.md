@@ -5,7 +5,7 @@
 
 ## What is FinanceMath?
 
-FinanceMath is a Ruby library for mapping Loan based Exel functions. It deals with problem of calculating the PMT and APR functions. It implements advanced usage, taking into account bank fees, fee for for each payment and currency protection (if currency other than $ USD). Highly precise with high speed of execution. 
+FinanceMath is a Ruby library for mapping Loan based Exel functions. It deals with problem of calculating the PMT and APR functions. It implements advanced usage, taking into account bank fees, fee for for each payment and currency protection (if currency other than $ USD). Highly precise with high speed of execution.
 
 ## Installation
 
@@ -19,6 +19,10 @@ If you're using Bundler, add the gem to Gemfile.
 
 Run `bundle install`.
 
+## Running tests
+
+    bundle exec rspec spec/
+
 ## Basic Usage
 
 Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan.
@@ -31,7 +35,7 @@ Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000)
 
 ## Advanced Usage
 
-Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment. 
+Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment.
 
 Defaults are structure_fee = 5, currency protection = 3, so please update if you need other values.
 
@@ -40,7 +44,7 @@ Defaults are structure_fee = 5, currency protection = 3, so please update if you
 Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000, structure_fee: 5.1, currency_protection: 2.75, fee: 25)
 ```
 
-## Functions 
+## Functions
 
 This is the list of available functions.
 
@@ -83,6 +87,10 @@ loan.apr
 ## Tests
 
 Please cover with tests your pull requests
+
+## Ruby versions
+
+   Currently supported up to 2.4.1 
 
 ## Credits
 
