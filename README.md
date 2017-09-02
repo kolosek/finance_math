@@ -30,7 +30,7 @@ Defaults are structure_fee = 5, currency protection = 3, so please update if you
 
 ```ruby
 
-Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000)
+FinanceMath::Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000)
 ```
 
 ## Advanced Usage
@@ -41,36 +41,36 @@ Defaults are structure_fee = 5, currency protection = 3, so please update if you
 
 ```ruby
 
-Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000, structure_fee: 5.1, currency_protection: 2.75, fee: 25)
+FinanceMath::Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000, structure_fee: 5.1, currency_protection: 2.75, fee: 25)
 ```
 
 ## Functions
 
 This is the list of available functions.
 
-### Loan.pmt
+### FinanceMath::Loan.pmt
 
 Calculates the periodic payment for an annuity investment based on constant-amount periodic payments and a constant interest rate.
 
 ```ruby
 
-loan = Loan.new(nominal_rate: 10, duration: 12, amount: 1000)
+loan = FinanceMath::Loan.new(nominal_rate: 10, duration: 12, amount: 1000)
 loan.pmt
 # 87.9158872300099
 
 ```
 
-### Loan.apr
+### FinanceMath::Loan.apr
 
 Calculates the Annual Percentage Rate.
 
 ```ruby
 
-loan = Loan.new(nominal_rate: 13, duration: 12, amount: 10000)
+loan = FinanceMath::Loan.new(nominal_rate: 13, duration: 12, amount: 10000)
 loan.apr
 #29.179538647635006
 
-loan = Loan.new(nominal_rate: 15, duration: 36, amount: 10000, structure_fee: 5, currency_protection: 3, fee: 10)
+loan = FinanceMath::Loan.new(nominal_rate: 15, duration: 36, amount: 10000, structure_fee: 5, currency_protection: 3, fee: 10)
 loan.apr
 #23.964418264624054
 
