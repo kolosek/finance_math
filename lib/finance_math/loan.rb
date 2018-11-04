@@ -13,18 +13,18 @@ module FinanceMath
     # @return [Float] the nominal annual rate
     # @api public
     attr_accessor :nominal_rate
-   
+
     # @return [DecNum] the monthly rate
     # @api public
     attr_reader :monthly_rate
 
     # @return [DecNum] the currency protection
     # @api public
-    attr_reader :currency_protection  
+    attr_reader :currency_protection
 
     # @return [DecNum] the fee for the bank/market
     # @api public
-    attr_reader :structure_fee    
+    attr_reader :structure_fee
 
     # @return [DecNum] P principal
     # @api public
@@ -42,17 +42,18 @@ module FinanceMath
     # @param [Float] structure fee - fee for the market in percentages
     # @param [Float] currency protection - Protection for currency changes - usually 3%, default to 0%
     # @example create a 10.5% Nominal rate
-    #   Loan.new(10.5, 12, 1000)
     # @see http://en.wikipedia.org/wiki/Nominal_interest_rate
     # @api public
 
-    def initialize(nominal_rate, duration, amount, structure_fee=5, currency_protection=3, fee=0)
-      @nominal_rate, @amount, @duration, @structure_fee, @currency_protection, @fee = nominal_rate.to_f, amount, duration, structure_fee.to_f, currency_protection.to_f, fee.to_f
+    def initialize(options = {})
+      initialize_options(options)
       @principal = principal_calculation
       @monthly_rate = @nominal_rate / 100 / 12
     end
 
-    def pmt(future_value=0, type=0)
+    def pmt(options = {})
+      future_value = options.fetch(:future_value, 0)
+      type = options.fetch(:type, 0)
       ((@amount * interest(@monthly_rate, @duration) - future_value ) / ((1.0 + @monthly_rate * type) * fvifa(@monthly_rate, duration)))
     end
 
@@ -65,20 +66,29 @@ module FinanceMath
       def pow1pm1(x, y)
         (x <= -1) ? ((1 + x) ** y) - 1 : Math.exp(y * Math.log(1.0 + x)) - 1
       end
-    
+
       def pow1p(x, y)
         (x.abs > 0.5) ? ((1 + x) ** y) : Math.exp(y * Math.log(1.0 + x))
       end
-    
+
       def interest(monthly_rate, duration)
         pow1p(monthly_rate, duration)
       end
-    
+
       def fvifa(monthly_rate, duration)
         (monthly_rate == 0) ? duration : pow1pm1(monthly_rate, duration) / monthly_rate
       end
 
     private
+
+      def initialize_options(options)
+        @nominal_rate = options.fetch(:nominal_rate).to_f
+        @duration = options.fetch(:duration).to_f
+        @amount = options.fetch(:amount).to_f
+        @structure_fee = options.fetch(:structure_fee, 5).to_f
+        @currency_protection = options.fetch(:currency_protection, 3).to_f
+        @fee = options.fetch(:fee, 0).to_f
+      end
 
       def principal_calculation
         amount * (1 - currency_protection/100 - structure_fee / 100 ) - fee * duration
@@ -89,8 +99,8 @@ module FinanceMath
       # where a = APR/1200, N = duration, P = monthly payment, C = loan_amount
       # Newton-Raphson finds root (the value for 'a' that makes f(a) = 0)
       def calculate_apr
-        payment_ratio = pmt / principal_calculation 
-        duration = @duration 
+        payment_ratio = pmt / principal_calculation
+        duration = @duration
         f = lambda {|k| (k**(duration + 1) - (k**duration * (payment_ratio + 1)) + payment_ratio)}
         f_deriv = lambda { |k| ((duration + 1) * k**duration) - (duration * (payment_ratio + 1) * k**(duration - 1))}
 

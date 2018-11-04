@@ -6,9 +6,9 @@ require 'version'
 Gem::Specification.new do |spec|
   spec.name          = "finance_math"
   spec.version       = FinanceMath::VERSION
-  spec.authors       = ["Nebojsa Zoric"]
-  spec.email         = ["office@kolosek.com"]
-  spec.summary       = %q{Finance and mortgage library for Ruby.}
+  spec.authors       = ["Nesha Zoric"]
+  spec.email         = ["nesha@kolosek.com"]
+  spec.summary       = %q{Most accurate APR and PMT caluclator for Ruby.}
   spec.description   = %q{Implementation of Loan/Mortgage functions in Ruby language. APR function and PMT function. In calculations it includes implementation of bank fee, marketplace fee, fees for each payment to provide the most precise calculation at very high speed. }
   spec.homepage      = "http://kolosek.com"
   spec.license       = "MIT"

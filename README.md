@@ -5,7 +5,7 @@
 
 ## What is FinanceMath?
 
-FinanceMath is a Ruby library for mapping Loan based Exel functions. It deals with problem of calculating the PMT and APR functions. It implements advanced usage, taking into account bank fees, fee for for each payment and currency protection (if currency other than $ USD). Highly precise with high speed of execution. 
+FinanceMath is a Ruby library for mapping Loan based Exel functions. It deals with problem of calculating the PMT and APR functions. It implements advanced usage, taking into account bank fees, fee for for each payment and currency protection (if currency other than $ USD). Highly precise with high speed of execution.
 
 ## Installation
 
@@ -19,53 +19,58 @@ If you're using Bundler, add the gem to Gemfile.
 
 Run `bundle install`.
 
+## Running tests
+
+    bundle exec rspec spec/
+
 ## Basic Usage
 
 Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan.
+Defaults are structure_fee = 5, currency protection = 3, so please update if you need other values.
 
 ```ruby
 
-Loan.new(10.5, 12, 15000)
+FinanceMath::Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000)
 ```
 
 ## Advanced Usage
 
-Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment. 
+Create an instance, and pass parameters for nominal annual rate, duration (in months), and amount of loan, and additional values such as bank fee, currency protection, and fee for each monthly payment.
 
-Defaults are bank fee = 5, currency protection = 3, so please update if you need other values.
+Defaults are structure_fee = 5, currency protection = 3, so please update if you need other values.
 
 ```ruby
 
-Loan.new(10.5, 12, 15000, 5.1, 2.75, 25)
+FinanceMath::Loan.new(nominal_rate: 10.5, duration: 12, amount: 15000, structure_fee: 5.1, currency_protection: 2.75, fee: 25)
 ```
 
-## Functions 
+## Functions
 
 This is the list of available functions.
 
-### Loan.pmt
+### FinanceMath::Loan.pmt
 
 Calculates the periodic payment for an annuity investment based on constant-amount periodic payments and a constant interest rate.
 
 ```ruby
 
-loan = Loan.new(10, 12, 1000)
+loan = FinanceMath::Loan.new(nominal_rate: 10, duration: 12, amount: 1000)
 loan.pmt
 # 87.9158872300099
 
 ```
 
-### Loan.apr
+### FinanceMath::Loan.apr
 
 Calculates the Annual Percentage Rate.
 
 ```ruby
 
-loan = Loan.new(13, 12, 10000)
+loan = FinanceMath::Loan.new(nominal_rate: 13, duration: 12, amount: 10000)
 loan.apr
 #29.179538647635006
 
-loan = Loan.new(15, 36, 10000, 5, 3, 10)
+loan = FinanceMath::Loan.new(nominal_rate: 15, duration: 36, amount: 10000, structure_fee: 5, currency_protection: 3, fee: 10)
 loan.apr
 #23.964418264624054
 
@@ -83,9 +88,18 @@ loan.apr
 
 Please cover with tests your pull requests
 
-## Copyright
+## Ruby versions
 
-Copyright (c) 2014-2015 Nebojsa Zoric, and Kolosek, Inc. (http://kolosek.com)
+   Currently supported up to 2.4.1 
+
+## Credits
+
+Finance Math is maintained and sponsored by
+[Kolosek] (http://kolosek.com).
+
+![Kolosek](http://kolosek.com/logo.png)
+
+Initially developed by Nebojsa Zoric
 
 ###Follow up @nebojsaz and @kolosek
 
