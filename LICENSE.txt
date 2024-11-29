@@ -1,4 +1,4 @@
-Copyright (c) 2015 Nebojsa Zoric
+Copyright (c) 2015 Nebojsa Zoric/Kolosek
 
 MIT License
 
